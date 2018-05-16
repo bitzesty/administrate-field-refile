@@ -18,5 +18,9 @@ By default, the attribute is rendered as a link tag.
     <%= link_to photo.file_filename, attachment_url(photo, :file) %>
   <% end %>
 <% else %>
-  <%= link_to @_requested_resource.public_send("#{field.name}_filename"), attachment_url(@_requested_resource, field.attribute) %>
+  <% if @image_fields.include? field.name %>
+		<%= link_to @requested_resource.public_send("#{field.name}_id"), attachment_url(@requested_resource, field.attribute, format: "jpg") %>
+	<% else %>
+  	<%= link_to @requested_resource.public_send("#{field.name}_id"), attachment_url(@requested_resource, field.attribute) %>
+	<% end %>
 <% end %>
