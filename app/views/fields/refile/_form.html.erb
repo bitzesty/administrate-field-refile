@@ -17,4 +17,9 @@ This partial renders an attachment_field element for uloading files.
 </div>
 <div class="field-unit__field">
   <%= f.attachment_field field.attribute, direct: field.direct, presigned: field.presigned, multiple: field.multiple %>
+  <% if @requested_resource.class.to_s == "Instance" && field.attribute.to_s == "hero_image" %>
+    <%= link_to "delete image", "/admin/instances/#{@requested_resource.id}/delete_hero_image", method: :delete %>
+  <% elsif @requested_resource.class.to_s == "Instance" && field.attribute.to_s == "homepage_video" %>
+    <%= link_to "delete video", "/admin/instances/#{@requested_resource.id}/delete_homepage_video", method: :delete %>
+  <% end %>
 </div>
